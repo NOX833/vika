@@ -6,84 +6,165 @@
 <title>Vika Training Academy</title>
 <style>
   :root{
-    --green:#0B8A3F;        /* brand green */
+    --green:#0B8A3F;
     --green-2:#00a651;
+    --glass-bg:rgba(255,255,255,0.15);
+    --glass-border:rgba(255,255,255,0.35);
+    --glass-shadow:0 8px 32px 0 rgba(31,38,135,0.18);
     --text:#222;
     --muted:#666;
     --light:#f5f7f6;
     --line:#e6e9eb;
     --dark:#0b0f0d;
+    --radius-xl:24px;
+    --radius-md:14px;
+    --radius-sm:8px;
+    --blur:16px;
+    --font-main:'Inter',Arial,Helvetica,sans-serif;
+    --font-weight-bold:700;
+    --font-weight-reg:400;
+    --transition:all .28s cubic-bezier(.4,0,.2,1);
   }
-  *{box-sizing:border-box}
-  body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:#fff;line-height:1.55}
+  body{
+    margin:0;
+    font-family:var(--font-main);
+    color:var(--text);
+    background:linear-gradient(120deg,#eef3f7 0%,#e2f8ea 100%);
+    line-height:1.6;
+    min-height:100vh;
+  }
 
-  /* ===== Header (Sticky) ===== */
-  header{position:sticky; top:0; z-index:1000; background:#fff; border-bottom:1px solid #eef1f2; box-shadow:0 4px 16px rgba(0,0,0,.04)}
-  .nav{max-width:1200px; margin:auto; padding:10px 20px; display:flex; align-items:center; justify-content:space-between; gap:16px}
-  .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text)}
-  .brand img{height:64px; opacity:.90; filter:brightness(.92) contrast(.98)}  /* softer logo per your request */
-  .brand .name{font-weight:800}
-  nav ul{margin:0; padding:0; list-style:none; display:flex; gap:22px; flex-wrap:wrap}
-  nav a{color:var(--text); text-decoration:none; font-weight:600}
-  nav a:hover{color:var(--green)}
-  .cta{display:inline-block; background:var(--green); color:#fff; padding:10px 16px; border-radius:10px; font-weight:700; text-decoration:none}
-  .cta:hover{background:#086a31}
+  .glass{
+    background:var(--glass-bg);
+    border-radius:var(--radius-xl);
+    box-shadow:var(--glass-shadow);
+    border:1.5px solid var(--glass-border);
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+    padding:32px;
+    transition:var(--transition);
+  }
+  .card{background:var(--glass-bg); border-radius:var(--radius-md); box-shadow:var(--glass-shadow); border:1.2px solid var(--glass-border); backdrop-filter:blur(var(--blur)); -webkit-backdrop-filter:blur(var(--blur)); padding:22px 20px; color:var(--text); transition:var(--transition);}
+  .card:hover{box-shadow:0 12px 24px rgba(31,38,135,.22);transform:scale(1.025);}
+  .section{max-width:1200px; margin:auto; padding:56px 20px;}
 
-  /* ===== Hero (use your image, less vivid) ===== */
+  header{
+    position:sticky; top:0; z-index:1000;
+    border-bottom:1.5px solid var(--glass-border);
+    background:var(--glass-bg);
+    box-shadow:var(--glass-shadow);
+    backdrop-filter:blur(var(--blur));
+    -webkit-backdrop-filter:blur(var(--blur));
+    transition:var(--transition);
+  }
+  .nav{
+    max-width:1200px; margin:auto; padding:20px 32px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+  }
+  .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--green); font-weight:800; font-size:1.35rem;}
+  .brand img{height:58px; opacity:.92; filter:brightness(.98) contrast(.99)}
+  nav ul{margin:0; padding:0; list-style:none; display:flex; gap:32px;}
+  nav a{color:var(--text); text-decoration:none; font-weight:600; padding:7px 18px; border-radius:var(--radius-md); transition:var(--transition);}
+  nav a:hover{background:var(--green); color:#fff;}
+  .cta{display:inline-block; background:linear-gradient(90deg,var(--green),var(--green-2)); color:#fff; padding:12px 22px; border-radius:var(--radius-xl); font-weight:700; text-decoration:none; box-shadow:0 2px 8px rgba(0,0,0,.08); transition:var(--transition);}
+  .cta:hover{background:linear-gradient(90deg,#086a31,#009e44); transform:scale(1.04);}
+  
   .hero{
     background:
-      linear-gradient(0deg, rgba(0,0,0,.55), rgba(0,0,0,.55)),
+      linear-gradient(120deg,rgba(11,138,63,0.12) 0%,rgba(255,255,255,0.16) 100%),
       url('https://i.postimg.cc/t78GqgBn/vikaimage-top.jpg') center/cover no-repeat;
     color:#fff;
+    min-height:440px;
+    display:flex;
+    align-items:center;
   }
-  .hero .wrap{max-width:1200px; margin:auto; padding:90px 20px 80px; display:grid; grid-template-columns:1.15fr .85fr; gap:32px}
-  .hero h1{margin:0 0 10px; font-size:clamp(28px,4vw,44px)}
-  .hero p{margin:0 0 18px}
-  .btn{display:inline-block; padding:10px 16px; border-radius:10px; font-weight:700; text-decoration:none}
-  .btn-primary{background:var(--green); color:#fff}
-  .btn-primary:hover{background:#086a31}
-  .btn-outline{border:2px solid #fff; color:#fff}
-  .btn-outline:hover{background:#fff; color:var(--green)}
-  .card{background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px; color:var(--text); box-shadow:0 8px 18px rgba(0,0,0,.06)}
-  @media (max-width:960px){ .hero .wrap{grid-template-columns:1fr} }
+  .hero .wrap{
+    max-width:1200px;
+    margin:auto;
+    padding:110px 24px 90px;
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:36px;
+  }
+  .hero h1{
+    margin:0 0 14px;
+    font-size:clamp(34px,5vw,54px);
+    font-weight:900;
+    letter-spacing:-1px;
+    color:#fff;
+    text-shadow:0 4px 24px rgba(0,0,0,.18);
+  }
+  .hero p{margin:0 0 24px; font-size:1.3rem;}
+  .btn{display:inline-block; padding:12px 22px; border-radius:var(--radius-md); font-weight:700; text-decoration:none; transition:var(--transition);}
+  .btn-primary{background:linear-gradient(90deg,var(--green),var(--green-2)); color:#fff;}
+  .btn-primary:hover{background:linear-gradient(90deg,#086a31,#009e44); transform:scale(1.04);}
+  .btn-outline{border:2px solid #fff; color:#fff;}
+  .btn-outline:hover{background:#fff; color:var(--green);}
+  
+  .grid{display:grid; gap:22px;}
+  .grid.cols-2{grid-template-columns:repeat(2,1fr);}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr);}
+  @media (max-width:960px){ .hero .wrap{grid-template-columns:1fr;} .grid.cols-3{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:640px){ .grid.cols-2,.grid.cols-3{grid-template-columns:1fr;} .section{padding:34px 8px;} .hero .wrap{padding:60px 8px;} }
+  
+  .icon{width:46px;height:46px;border-radius:14px;background:var(--glass-bg);display:grid;place-items:center;color:var(--green);font-size:1.6rem;font-weight:900;box-shadow:var(--glass-shadow);}
+  
+  .price-wrap{max-width:1200px; margin:auto; padding:30px;}
+  .price-title{font-weight:900; text-align:center; font-size:2rem; margin:22px 0;}
+  .bar{background:linear-gradient(90deg,var(--green),var(--green-2)); color:#fff; font-weight:800; padding:10px 12px; border-radius:var(--radius-md); margin-bottom:8px;}
+  table.pricetable{width:100%; border-collapse:collapse; margin:0 0 32px; background:var(--glass-bg); border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--glass-shadow);}
+  table.pricetable th, table.pricetable td{border:1px solid #ddd; padding:10px 12px; text-align:center; font-size:15px; background:rgba(255,255,255,0.12);}
+  table.pricetable th{background:linear-gradient(90deg,var(--green-2),#18c977);}
+  .note{color:#c00; font-weight:800; margin:12px 0 38px;}
+  
+  .cta-banner{background:var(--glass-bg); color:var(--green); border-radius:var(--radius-xl); padding:32px; display:flex; justify-content:space-between; align-items:center; gap:12px; box-shadow:var(--glass-shadow); backdrop-filter:blur(var(--blur));}
+  
+  footer{
+    background:linear-gradient(120deg,var(--dark) 0%,#222f24 100%);
+    color:#dfe6e2;
+    margin-top:54px;
+    border-top:1.5px solid var(--glass-border);
+    box-shadow:0 -4px 24px rgba(31,38,135,0.15);
+  }
+  footer a{color:#dfe6e2; text-decoration:none;}
+  .foot{max-width:1200px; margin:auto; padding:48px 20px; display:grid; gap:32px; grid-template-columns:2fr 1fr 1fr 1fr;}
+  .tiny{font-size:13px; color:#9fb2a7;}
+  @media (max-width:900px){ .foot{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .foot{grid-template-columns:1fr;} }
 
-  /* ===== Sections / Grids ===== */
-  .section{max-width:1200px; margin:auto; padding:48px 20px}
-  .section h2{margin:0 0 16px; font-size:clamp(22px,3.5vw,30px)}
-  .muted{color:var(--muted)}
-  .grid{display:grid; gap:16px}
-  .grid.cols-2{grid-template-columns:repeat(2,1fr)}
-  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
-  @media (max-width:900px){ .grid.cols-3{grid-template-columns:repeat(2,1fr)} }
-  @media (max-width:640px){ .grid.cols-2,.grid.cols-3{grid-template-columns:1fr} }
-  .icon{width:44px;height:44px;border-radius:10px;background:var(--light);display:grid;place-items:center;color:var(--green);font-weight:900}
-
-  /* ===== Price List Tables (match your screenshots) ===== */
-  .price-wrap{max-width:1200px; margin:auto; padding:20px}
-  .price-title{font-weight:900; text-align:center; font-size:22px; margin:14px 0}
-  .bar{background:var(--green); color:#fff; font-weight:800; padding:8px 10px; border:1px solid #000; border-bottom:0}
-  table.pricetable{width:100%; border-collapse:collapse; margin:0 0 26px}
-  table.pricetable th, table.pricetable td{border:1px solid #000; padding:6px 8px; text-align:center; font-size:14px}
-  table.pricetable th{background:var(--green-2); color:#fff}
-  .note{color:#c00; font-weight:800; margin:8px 0 28px}
-
-  /* ===== CTA banner ===== */
-  .cta-banner{background:linear-gradient(90deg, var(--green), var(--green-2)); color:#fff; border-radius:16px; padding:24px; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap}
-
-  /* ===== Footer ===== */
-  footer{background:var(--dark); color:#dfe6e2; margin-top:40px}
-  footer a{color:#dfe6e2; text-decoration:none}
-  .foot{max-width:1200px; margin:auto; padding:36px 20px; display:grid; gap:22px; grid-template-columns:2fr 1fr 1fr 1fr}
-  .tiny{font-size:12px; color:#9fb2a7}
-  @media (max-width:900px){ .foot{grid-template-columns:1fr 1fr} }
-  @media (max-width:560px){ .foot{grid-template-columns:1fr} }
+  form.card input, form.card textarea{
+    font-family:var(--font-main);
+    font-size:1rem;
+    width:100%;
+    border-radius:var(--radius-sm);
+    border:1.2px solid var(--line);
+    background:rgba(255,255,255,.18);
+    color:var(--text);
+    padding:12px;
+    margin-top:4px;
+    margin-bottom:12px;
+    box-shadow:0 2px 8px rgba(31,38,135,.07);
+    outline:none;
+    transition:var(--transition);
+  }
+  form.card input:focus, form.card textarea:focus{
+    border-color:var(--green);
+    background:rgba(255,255,255,.30);
+  }
+  button.cta{
+    font-size:1.08rem;
+    border:none;
+    cursor:pointer;
+    margin-top:8px;
+    padding:11px 22px;
+  }
 </style>
 </head>
 <body>
 
 <!-- ===== Header ===== -->
 <header>
-  <div class="nav">
+  <div class="nav glass">
     <a class="brand" href="#home" aria-label="Vika Training Academy">
       <img src="https://i.postimg.cc/wyqHKbTv/vikaimage.png" alt="Vika Training Academy Logo">
       <span class="name">Vika Training Academy</span>
@@ -105,23 +186,21 @@
 <!-- ===== Hero ===== -->
 <section id="home" class="hero">
   <div class="wrap">
-    <div>
+    <div class="glass">
       <h1>Empowering Futures Through Quality Training</h1>
       <p>Accredited courses designed for career success.</p>
-      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:16px">
+      <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:22px">
         <a class="btn btn-primary" href="#courses">Explore Courses</a>
         <a class="btn btn-outline" href="#admissions">Enroll Now</a>
       </div>
     </div>
-
-    <!-- Quick Highlights -->
     <div class="card">
       <h3>Quick Highlights</h3>
-      <div class="grid cols-2" style="margin-top:10px">
-        <div style="display:flex; gap:10px; align-items:center"><div class="icon">✓</div><div><strong>Accredited</strong><div class="muted">Registered & quality-assured</div></div></div>
-        <div style="display:flex; gap:10px; align-items:center"><div class="icon">👩🏽‍🏫</div><div><strong>Experienced Trainers</strong><div class="muted">Industry professionals</div></div></div>
-        <div style="display:flex; gap:10px; align-items:center"><div class="icon">🕒</div><div><strong>Flexible Learning</strong><div class="muted">Weekdays / weekends</div></div></div>
-        <div style="display:flex; gap:10px; align-items:center"><div class="icon">💼</div><div><strong>Career Support</strong><div class="muted">CV & placement help</div></div></div>
+      <div class="grid cols-2" style="margin-top:12px">
+        <div style="display:flex; gap:14px; align-items:center"><div class="icon">✓</div><div><strong>Accredited</strong><div class="muted">Registered & quality-assured</div></div></div>
+        <div style="display:flex; gap:14px; align-items:center"><div class="icon">👩🏽‍🏫</div><div><strong>Experienced Trainers</strong><div class="muted">Industry professionals</div></div></div>
+        <div style="display:flex; gap:14px; align-items:center"><div class="icon">🕒</div><div><strong>Flexible Learning</strong><div class="muted">Weekdays / weekends</div></div></div>
+        <div style="display:flex; gap:14px; align-items:center"><div class="icon">💼</div><div><strong>Career Support</strong><div class="muted">CV & placement help</div></div></div>
       </div>
     </div>
   </div>
@@ -130,7 +209,7 @@
 <!-- ===== About (with Accreditation) ===== -->
 <section id="about" class="section" style="background:var(--light); border-top:1px solid #eef1f2; border-bottom:1px solid #eef1f2">
   <div class="grid cols-2">
-    <div>
+    <div class="card">
       <h2>About Us</h2>
       <p>Vika Training Academy provides accredited, career-focused training that empowers individuals and teams to work safely, confidently and professionally.</p>
       <p><strong>Registration / Accreditation:</strong> REGISTRATION NR: <strong>2020/665481/07</strong></p>
@@ -140,21 +219,20 @@
     <div class="card">
       <h3>Accreditations & Partnerships</h3>
       <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center">
-        <img alt="SETA" src="https://dummyimage.com/120x60/0b8a3f/ffffff&text=SETA" style="height:48px; border-radius:6px">
-        <img alt="Department of Labour" src="https://dummyimage.com/160x60/0b8a3f/ffffff&text=DoL" style="height:48px; border-radius:6px">
-        <img alt="Partner" src="https://dummyimage.com/140x60/0b8a3f/ffffff&text=Partner" style="height:48px; border-radius:6px">
+        <img alt="SETA" src="https://dummyimage.com/120x60/0b8a3f/ffffff&text=SETA" style="height:48px; border-radius:7px">
+        <img alt="Department of Labour" src="https://dummyimage.com/160x60/0b8a3f/ffffff&text=DoL" style="height:48px; border-radius:7px">
+        <img alt="Partner" src="https://dummyimage.com/140x60/0b8a3f/ffffff&text=Partner" style="height:48px; border-radius:7px">
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== Meet the Team (ADDED) ===== -->
+<!-- ===== Meet the Team ===== -->
 <section id="team" class="section" style="background:#f9f9f9; border-top:1px solid #eef1f2; border-bottom:1px solid #eef1f2">
-  <h2 style="text-align:center; margin-bottom:30px">Meet the Team</h2>
-  <div class="grid cols-2" style="gap:40px; align-items:start">
-    <!-- Kabelo -->
-    <div class="card" style="background:#fff; padding:24px; border-radius:12px; display:flex; flex-direction:column; gap:16px">
-      <div style="font-size:40px; color:var(--green)">❝</div>
+  <h2 style="text-align:center; margin-bottom:34px">Meet the Team</h2>
+  <div class="grid cols-2" style="gap:42px; align-items:start">
+    <div class="card" style="background:var(--glass-bg); padding:26px; border-radius:var(--radius-xl); display:flex; flex-direction:column; gap:16px">
+      <div style="font-size:44px; color:var(--green)">❝</div>
       <p>
         A professional and registered assessor and moderator with 23 years of experience in the surface mining industry,
         he holds a B-Tech in Human Resource Management, a Bachelor of Commerce Honours in Human Resource Management,
@@ -163,14 +241,13 @@
         and Further Education and Training Certificate in Mineral Processing as well as Occupationally Directed Education Training and
         Development Practices Level 5, ODETP Level 5, and a Diploma in ODETP. He holds a 49% stake in the company.
       </p>
-      <div style="display:flex; align-items:center; gap:14px; margin-top:6px">
-        <img src="https://i.postimg.cc/d304nkdh/2e3f0025-080f-47ec-be82-03cf399718c8.jpg" alt="Mr. Kabelo Sehako" style="width:80px; height:80px; border-radius:50%; object-fit:cover">
-        <strong style="color:var(--green); font-size:16px">MR. KABELO SEHAKO</strong>
+      <div style="display:flex; align-items:center; gap:18px; margin-top:6px">
+        <img src="https://i.postimg.cc/d304nkdh/2e3f0025-080f-47ec-be82-03cf399718c8.jpg" alt="Mr. Kabelo Sehako" style="width:84px; height:84px; border-radius:50%; object-fit:cover; box-shadow:0 4px 20px rgba(31,38,135,.14)">
+        <strong style="color:var(--green); font-size:17px">MR. KABELO SEHAKO</strong>
       </div>
     </div>
-    <!-- Victoria -->
-    <div class="card" style="background:#fff; padding:24px; border-radius:12px; display:flex; flex-direction:column; gap:16px">
-      <div style="font-size:40px; color:var(--green)">❝</div>
+    <div class="card" style="background:var(--glass-bg); padding:26px; border-radius:var(--radius-xl); display:flex; flex-direction:column; gap:16px">
+      <div style="font-size:44px; color:var(--green)">❝</div>
       <p>
         A professional and registered Skills Development Facilitator, Assessor and Moderator with 22 years of experience in the surface mining industry.
         She holds a Bachelor of Commerce degree in Human Resource Development (BHRD), Bachelor of Commerce Honours in Human Resource Management
@@ -179,9 +256,9 @@
         and Further Education and Training Certificate in Mineral Processing, as well as Occupationally Directed Education Training and
         Development Practices Level 5, ODETP Level 5. She holds a 51% stake in the company.
       </p>
-      <div style="display:flex; align-items:center; gap:14px; margin-top:6px">
-        <img src="https://i.postimg.cc/BPSK612M/e5a632bc-fa9f-4f3a-be0f-cc813bdcc2d5.jpg" alt="Mrs. Victoria Molongwana" style="width:80px; height:80px; border-radius:50%; object-fit:cover">
-        <strong style="color:var(--green); font-size:16px">MRS. VICTORIA MOLONGWANA</strong>
+      <div style="display:flex; align-items:center; gap:18px; margin-top:6px">
+        <img src="https://i.postimg.cc/BPSK612M/e5a632bc-fa9f-4f3a-be0f-cc813bdcc2d5.jpg" alt="Mrs. Victoria Molongwana" style="width:84px; height:84px; border-radius:50%; object-fit:cover; box-shadow:0 4px 20px rgba(31,38,135,.14)">
+        <strong style="color:var(--green); font-size:17px">MRS. VICTORIA MOLONGWANA</strong>
       </div>
     </div>
   </div>
@@ -192,19 +269,19 @@
   <h2>Featured Courses</h2>
   <div class="grid cols-3">
     <div class="card">
-      <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop" alt="First Aid" style="width:100%;height:160px;object-fit:cover;border-radius:12px">
-      <div style="margin-top:8px"><strong>First Aid – Basic</strong><div class="muted">Novice: 2 Days • Refresher: 1 Day • Fee: R900,00</div></div>
-      <a class="btn" style="border:2px solid var(--green); color:var(--green); margin-top:8px" href="#pricelist">View Details</a>
+      <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop" alt="First Aid" style="width:100%;height:160px;object-fit:cover;border-radius:var(--radius-md)">
+      <div style="margin-top:12px"><strong>First Aid – Basic</strong><div class="muted">Novice: 2 Days • Refresher: 1 Day • Fee: R900,00</div></div>
+      <a class="btn" style="border:2px solid var(--green); color:var(--green); margin-top:12px" href="#pricelist">View Details</a>
     </div>
     <div class="card">
-      <img src="https://images.unsplash.com/photo-1581090128321-8616a54a7b74?q=80&w=1200&auto=format&fit=crop" alt="Forklift" style="width:100%;height:160px;object-fit:cover;border-radius:12px">
-      <div style="margin-top:8px"><strong>Forklift (F01–F02)</strong><div class="muted">Novice: 10 Days • Refresher: 1 Day • From R1 100,00</div></div>
-      <a class="btn" style="border:2px solid var(--green); color:var(--green); margin-top:8px" href="#pricelist">View Details</a>
+      <img src="https://images.unsplash.com/photo-1581090128321-8616a54a7b74?q=80&w=1200&auto=format&fit=crop" alt="Forklift" style="width:100%;height:160px;object-fit:cover;border-radius:var(--radius-md)">
+      <div style="margin-top:12px"><strong>Forklift (F01–F02)</strong><div class="muted">Novice: 10 Days • Refresher: 1 Day • From R1 100,00</div></div>
+      <a class="btn" style="border:2px solid var(--green); color:var(--green); margin-top:12px" href="#pricelist">View Details</a>
     </div>
     <div class="card">
-      <img src="https://images.unsplash.com/photo-1508385082359-f38ae991e8f2?q=80&w=1200&auto=format&fit=crop" alt="Working at Heights" style="width:100%;height:160px;object-fit:cover;border-radius:12px">
-      <div style="margin-top:8px"><strong>Working at Heights</strong><div class="muted">Novice: 2 Days • Refresher: 1 Day • Fee: R1300,00</div></div>
-      <a class="btn" style="border:2px solid var(--green); color:var(--green); margin-top:8px" href="#pricelist">View Details</a>
+      <img src="https://images.unsplash.com/photo-1508385082359-f38ae991e8f2?q=80&w=1200&auto=format&fit=crop" alt="Working at Heights" style="width:100%;height:160px;object-fit:cover;border-radius:var(--radius-md)">
+      <div style="margin-top:12px"><strong>Working at Heights</strong><div class="muted">Novice: 2 Days • Refresher: 1 Day • Fee: R1300,00</div></div>
+      <a class="btn" style="border:2px solid var(--green); color:var(--green); margin-top:12px" href="#pricelist">View Details</a>
     </div>
   </div>
 </section>
@@ -212,11 +289,11 @@
 <!-- ===== Testimonials (simple slider) ===== -->
 <section class="section">
   <h2>Student Testimonials</h2>
-  <div style="position:relative; overflow:hidden; border-radius:16px; border:1px solid var(--line)">
+  <div style="position:relative; overflow:hidden; border-radius:var(--radius-xl); border:1px solid var(--line); background:var(--glass-bg); box-shadow:var(--glass-shadow);">
     <div style="display:flex; width:300%; animation:slide 18s infinite">
-      <div style="width:100%; padding:24px"><div class="card">“The Forklift course was excellent. I passed and got placed within two weeks!” — <strong>Samuel M.</strong></div></div>
-      <div style="width:100%; padding:24px"><div class="card">“Working at Heights training gave our team the confidence to operate safely.” — <strong>Neo R.</strong></div></div>
-      <div style="width:100%; padding:24px"><div class="card">“Professional trainers, flexible schedule, and great support with my CV.” — <strong>Ayanda K.</strong></div></div>
+      <div style="width:100%; padding:32px"><div class="card">“The Forklift course was excellent. I passed and got placed within two weeks!” — <strong>Samuel M.</strong></div></div>
+      <div style="width:100%; padding:32px"><div class="card">“Working at Heights training gave our team the confidence to operate safely.” — <strong>Neo R.</strong></div></div>
+      <div style="width:100%; padding:32px"><div class="card">“Professional trainers, flexible schedule, and great support with my CV.” — <strong>Ayanda K.</strong></div></div>
     </div>
   </div>
 </section>
@@ -229,10 +306,9 @@
 }
 </style>
 
-<!-- ===== FULL PRICE LIST ===== -->
-<section id="pricelist" class="price-wrap">
+<!-- ===== FULL PRICE LIST - ALL TABLES! ===== -->
+<section id="pricelist" class="price-wrap glass">
   <div class="price-title">PRICE LIST FOR INDIVIDUALS</div>
-
   <!-- SAFETY MANAGEMENT COURSES -->
   <div class="bar">SAFETY MANAGEMENT COURSES</div>
   <table class="pricetable" aria-label="Safety Management Courses">
@@ -398,11 +474,11 @@
   <div class="grid cols-2">
     <form class="card" onsubmit="event.preventDefault(); alert('Thanks! We will reply soon.');">
       <div class="grid cols-2">
-        <div><label>Name<br><input required style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px"></label></div>
-        <div><label>Email<br><input type="email" required style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px"></label></div>
+        <div><label>Name<br><input required></label></div>
+        <div><label>Email<br><input type="email" required></label></div>
       </div>
-      <label>Phone<br><input style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px" value="073 024 5555"></label><br>
-      <label>Message<br><textarea rows="5" required style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px"></textarea></label><br>
+      <label>Phone<br><input value="073 024 5555"></label>
+      <label>Message<br><textarea rows="5" required></textarea></label>
       <button class="cta">Send Message</button>
       <a class="btn" style="border:2px solid var(--green); color:var(--green); margin-left:8px" href="https://wa.me/27730245555" target="_blank" rel="noopener">WhatsApp 073&nbsp;024&nbsp;5555</a>
     </form>
@@ -417,21 +493,21 @@
   </div>
 </section>
 
-<!-- ===== Graduation Gallery (your 3 photos) ===== -->
+<!-- ===== Graduation Gallery ===== -->
 <section class="section" id="gallery" style="background:var(--light); border-top:1px solid #eef1f2; border-bottom:1px solid #eef1f2">
   <h2 style="text-align:center">Graduation Moments</h2>
-  <div class="grid cols-3" style="margin-top:20px">
+  <div class="grid cols-3" style="margin-top:24px">
     <div class="card">
-      <img src="https://i.postimg.cc/NKzF8XYL/469991794-122206816070074314-2594736317617430924-n.jpg" 
-           alt="Graduation Photo 1" style="width:100%;height:250px;object-fit:cover;border-radius:12px">
+      <img src="https://i.postimg.cc/NKzF8XYL/469991794-122206816070074314-2594736317617430924-n.jpg"
+           alt="Graduation Photo 1" style="width:100%;height:250px;object-fit:cover;border-radius:var(--radius-md)">
     </div>
     <div class="card">
-      <img src="https://i.postimg.cc/dk1K5HBZ/470198516-122207165480074314-7929442715563580915-n.jpg" 
-           alt="Graduation Photo 2" style="width:100%;height:250px;object-fit:cover;border-radius:12px">
+      <img src="https://i.postimg.cc/dk1K5HBZ/470198516-122207165480074314-7929442715563580915-n.jpg"
+           alt="Graduation Photo 2" style="width:100%;height:250px;object-fit:cover;border-radius:var(--radius-md)">
     </div>
     <div class="card">
-      <img src="https://i.postimg.cc/SnTdWgJ3/470136365-122206815410074314-6233267797108820756-n.jpg" 
-           alt="Graduation Photo 3" style="width:100%;height:250px;object-fit:cover;border-radius:12px">
+      <img src="https://i.postimg.cc/SnTdWgJ3/470136365-122206815410074314-6233267797108820756-n.jpg"
+           alt="Graduation Photo 3" style="width:100%;height:250px;object-fit:cover;border-radius:var(--radius-md)">
     </div>
   </div>
 </section>
@@ -440,11 +516,11 @@
 <footer>
   <div class="foot">
     <div>
-      <div style="display:flex; gap:10px; align-items:center">
-        <img src="https://i.postimg.cc/wyqHKbTv/vikaimage.png" alt="VTA" style="height:40px; opacity:.9; filter:brightness(.92) contrast(.98)">
+      <div style="display:flex; gap:12px; align-items:center">
+        <img src="https://i.postimg.cc/wyqHKbTv/vikaimage.png" alt="VTA" style="height:46px; opacity:.93; filter:brightness(.96) contrast(.98)">
         <strong>Vika Training Academy</strong>
       </div>
-      <p class="tiny" style="margin-top:8px">Training is the essence of transformation.</p>
+      <p class="tiny" style="margin-top:12px">Training is the essence of transformation.</p>
       <p class="tiny">REGISTRATION NR: 2020/665481/07</p>
     </div>
     <div>
@@ -460,17 +536,13 @@
       <div class="tiny">SETA • Department of Labour • 2020/665481/07</div>
     </div>
   </div>
-  <div style="text-align:center; padding:10px 20px; border-top:1px solid #1d2a23" class="tiny">
+  <div style="text-align:center; padding:14px 22px; border-top:1px solid #1d2a23" class="tiny">
     © <span id="yr"></span> Vika Training Academy. All rights reserved.
   </div>
 </footer>
-
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
-
-
-
 
